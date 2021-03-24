@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Headline extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
+  //   constructor(props) {
+  //     super(props);
+  //   }
   render() {
     const { header, desc } = this.props;
     if (!header) return null;
@@ -15,5 +16,19 @@ class Headline extends React.Component {
     );
   }
 }
+
+Headline.propTypes = {
+  header: PropTypes.string,
+  desc: PropTypes.string,
+  tempArr: PropTypes.arrayOf(
+    PropTypes.shape({
+      fName: PropTypes.string,
+      lName: PropTypes.string,
+      email: PropTypes.string,
+      age: PropTypes.number,
+      onlineStatus: PropTypes.bool,
+    })
+  ),
+};
 
 export default Headline;
