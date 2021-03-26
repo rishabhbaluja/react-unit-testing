@@ -7,10 +7,31 @@ import ListItem from "./components/listItem/index";
 import { connect } from "react-redux";
 import { fetchPost } from "./actions";
 
+const initialState = {
+  hideBtn: false,
+};
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = initialState;
+  }
+
   fetch = () => {
     this.props.fetchPost();
+    this.exampleFunction_hideBtn();
   };
+
+  exampleFunction_hideBtn = () => {
+    const { hideBtn } = this.state;
+    this.setState({
+      hideBtn: !hideBtn,
+    });
+  };
+
+  exampleMethod_returnsAValue = (number)=>{
+    return number+1;
+  }
 
   render() {
     const configButton = {
@@ -19,7 +40,7 @@ class App extends React.Component {
     };
 
     const { posts } = this.props;
-
+    const { hideBtn } = this.state;
     const tempArr = [
       {
         fName: "test",
@@ -30,7 +51,7 @@ class App extends React.Component {
       },
     ];
     return (
-      <div className="App">
+      <div className="App" data-test="appComponent">
         <Header></Header>
         <section className="main">
           <Headline
@@ -38,7 +59,7 @@ class App extends React.Component {
             desc="Click the button to render posts"
             tempArr={tempArr}
           ></Headline>
-          <Button {...configButton}></Button>
+          {!hideBtn && <Button {...configButton}></Button>}
           {posts.length > 0 ? (
             <div>
               {posts.map((post, index) => {
